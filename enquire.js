@@ -4,16 +4,13 @@ import figlet from "figlet";
 import enquirer from "enquirer";
 import importedQuestions from "./fakedataenquire.js";
 
-// Die getRandomQuestion-Funktion, um eine zufällige Frage aus dem Fragenarray zu erhalten
 function getRandomQuestion() {
   const randomIndex = Math.floor(Math.random() * importedQuestions.length);
   return importedQuestions.splice(randomIndex, 1)[0];
 }
 let lastChance =
   " Jetzt musst du aufpassen, noch einen Fehler und Dobbys kopf wird rollen.";
-(async function () {
-  // Rest des Codes bleibt unverändert
-})();
+(async function () {})();
 
 const { Select } = enquirer;
 
@@ -75,6 +72,11 @@ const { Select } = enquirer;
           )
         );
         console.log(chalk.red(data));
+        console.log(
+          chalk.yellow(
+            `Dobby sagt Fck You ${name} du manyak bevor er getötet wird`
+          )
+        );
         process.exit();
       });
     }
@@ -109,9 +111,10 @@ const { Select } = enquirer;
           `Falsche Antwort. Die richtige Antwort ist ${question.answer}.${lastChance}`
         )
       );
-      await sleep(4000);
+
       wrongAnswerCount++;
       endGame(wrongAnswerCount);
+      await sleep(3000);
     }
 
     if (importedQuestions.length > 0) {
