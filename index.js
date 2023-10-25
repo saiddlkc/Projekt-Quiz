@@ -7,17 +7,26 @@ import importedQuestions from "./faktedata.js";
 console.clear;
 let userName = readlineSync.question(chalk.yellow("Name eingeben:"));
 console.clear();
-figlet(`Willkommen bei meinem QUIZ.  ${userName}`, function (err, data) {
-  console.log(data);
-});
-await sleep(1000);
-console.log(chalk.yellowBright("LOS GEHTS "));
+figlet(
+  `Willkommen bei meinem QUIZ.  Meister ${userName}`,
+  function (err, data) {
+    console.log(data);
+  }
+);
 await sleep(2000);
+console.log(
+  chalk.yellowBright(
+    "Hilf Dobby zu entkommen, indem du 6 Fragen richtig beantwortest. Aber pass auf wenn du zuviele Fehler machst muss Dobby sterben."
+  )
+);
+readlineSync.keyInPause("Drücke eine beliebige Taste, um fortzufahren...");
+await sleep(1000);
+
 let score = 0; // zähl richtige antwort
 let countAnswer = 0; // zähl wieviele Fragen richtig gemacht gib ende zurück
 let wrongAnswerCount = 0; // zähl wieviele Fragen falsch gemacht
 let lastChance =
-  " Jetzt musst du aufpassen, noch einen Fehler dürfen wir uns nicht erlauben.";
+  " Jetzt musst du aufpassen, noch einen Fehler und Dobbys kopf wird rollen.";
 
 //  Zähl  wv Fragen richtig wenn größer als 5 WIN
 function winGame(score) {
@@ -25,7 +34,9 @@ function winGame(score) {
     figlet("GEWONNEN", function (err, data) {
       console.clear();
       console.log(
-        chalk.blue(`du hast  ${countAnswer} Fragen richtig beantwortet`)
+        chalk.blue(
+          `Meister hat ${countAnswer} Fragen richtig beantwortet. Dobby ist jetzt FREI`
+        )
       );
       console.log(chalk.green(data));
       process.exit();
@@ -38,8 +49,12 @@ function endGame(wrongAnswerCount) {
     console.clear();
     figlet("GAME OVER", function (err, data) {
       console.log(
-        chalk.blue(`du hast  ${countAnswer} Fragen richtig beantwortet`)
+        chalk.blue(
+          `Meister ${userName} hat nur  ${countAnswer} richtig und zuviele Fehler gemacht`
+        )
       );
+      console.log(chalk.red("Dobby muss jetzt sterben."));
+
       console.log(chalk.red(data));
       process.exit();
     });
@@ -65,6 +80,7 @@ while (currentQuestion) {
   );
 
   if (userAnswer.toLowerCase() === currentQuestion.answer) {
+    // WENN WAHR
     console.log(
       chalk.green(
         `Richtige Antwort, gut gemacht ${userName}! Hier kommt die nächste Frage `
@@ -74,11 +90,14 @@ while (currentQuestion) {
     countAnswer++;
     winGame(score);
   } else {
+    // WENN NICHT WAHR
+
     console.log(
       chalk.red(
         `Falsche Antwort. Die richtige Antwort ist ${currentQuestion.answer}.${lastChance}`
       )
     );
+    await sleep(2500);
     wrongAnswerCount++;
     endGame(wrongAnswerCount);
   }
