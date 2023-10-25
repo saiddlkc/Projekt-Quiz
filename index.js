@@ -9,7 +9,7 @@ function getRandomQuestion() {
   return importedQuestions.splice(randomIndex, 1)[0];
 }
 let lastChance =
-  " Jetzt musst du aufpassen, noch einen Fehler und Dobbys kopf wird rollen.";
+  " Jetzt musst du aufpassen, noch ein Fehler und Dobby muss sterben.";
 (async function () {})();
 
 const { Select } = enquirer;
@@ -53,7 +53,7 @@ const { Select } = enquirer;
         console.clear();
         console.log(
           chalk.blue(
-            `${name} hat ${countAnswer} Fragen richtig beantwortet. Dobby ist jetzt FREI!`
+            `${name} hat ${countAnswer} Fragen richtig beantwortet und somit Dobby eine Socke geschenkt. Dobby ist jetzt FREI!`
           )
         );
         console.log(chalk.green(data));
@@ -74,7 +74,7 @@ const { Select } = enquirer;
         console.log(chalk.red(data));
         console.log(
           chalk.yellow(
-            `Dobby sagt Fck You ${name} du manyak bevor er getötet wird`
+            `Dobby sagt Fck You ${name} du MANYAK bevor er getötet wird`
           )
         );
         process.exit();
@@ -114,7 +114,7 @@ const { Select } = enquirer;
 
       wrongAnswerCount++;
       endGame(wrongAnswerCount);
-      await sleep(3000);
+      await sleep(5000);
     }
 
     if (importedQuestions.length > 0) {
