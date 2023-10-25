@@ -111,10 +111,13 @@ const { Select } = enquirer;
           `Falsche Antwort. Die richtige Antwort ist ${question.answer}.${lastChance}`
         )
       );
-
       wrongAnswerCount++;
       endGame(wrongAnswerCount);
-      await sleep(5000);
+      await enquirer.prompt({
+        type: "input",
+        name: "continue",
+        message: "Drücke Enter, um fortzufahren...",
+      });
     }
 
     if (importedQuestions.length > 0) {
@@ -123,7 +126,8 @@ const { Select } = enquirer;
     } else {
       console.log(
         chalk.blue(
-          `${name} hat alle Fragen beantwortet. Das Quiz ist beendet. Dobby ist frei!`
+          `${name} hat alle Fragen beantwortet. Das Quiz ist beendet. Dobby ist frei!
+          ${customFigletText} `
         )
       );
       process.exit();
