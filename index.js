@@ -12,6 +12,10 @@ let lastChance =
   " Jetzt musst du aufpassen, noch ein Fehler und Dobby muss sterben.";
 (async function () {})();
 
+let score = 0;
+let countAnswer = 0;
+let wrongAnswerCount = 0;
+
 const { Select } = enquirer;
 
 (async function () {
@@ -43,10 +47,6 @@ const { Select } = enquirer;
 
   await sleep(1000);
 
-  let score = 0;
-  let countAnswer = 0;
-  let wrongAnswerCount = 0;
-
   function winGame(score) {
     if (score > 5) {
       figlet("GEWONNEN", function (err, data) {
@@ -73,9 +73,7 @@ const { Select } = enquirer;
         );
         console.log(chalk.red(data));
         console.log(
-          chalk.yellow(
-            `Dobby sagt Fck You ${name} du MANYAK bevor er getötet wird`
-          )
+          chalk.yellow(`Dobby sagt Fck You ${name} bevor er getötet wird`)
         );
         process.exit();
       });
