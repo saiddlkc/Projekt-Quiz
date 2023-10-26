@@ -27,7 +27,7 @@ let score = 0; // zähl richtige antwort
 let countAnswer = 0; // zähl wieviele Fragen richtig gemacht gib ende zurück
 let wrongAnswerCount = 0; // zähl wieviele Fragen falsch gemacht
 let lastChance =
-  "  Jetzt musst du aufpassen, noch einen Fehler und Dobbys kopf wird rollen.";
+  "  Jetzt musst du aufpassen, noch ein Fehler und Dobbys muss sterben.";
 
 //  Zähl  wv Fragen richtig wenn größer als 5 WIN
 function winGame(score) {
@@ -92,6 +92,11 @@ while (currentQuestion) {
     );
     wrongAnswerCount++;
     endGame(wrongAnswerCount);
+    await enquirer.prompt({
+      type: "input",
+      name: "continue",
+      message: "Drücke Enter, um fortzufahren...",
+    });
   }
 
   if (importedQuestions.length > 0) {
